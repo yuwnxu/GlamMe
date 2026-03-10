@@ -12,6 +12,7 @@ void navToSignIn(context) {
     context,
   ).pushReplacement(MaterialPageRoute(builder: (context) => SignIn()));
   clearControllers();
+  clearErrors();
 }
 
 void navToReg(context) {
@@ -19,6 +20,7 @@ void navToReg(context) {
     context,
   ).pushReplacement(MaterialPageRoute(builder: (context) => Register()));
   clearControllers();
+  clearErrors();
 }
 
 void navToHome(context) {
@@ -26,6 +28,7 @@ void navToHome(context) {
     context,
   ).pushReplacement(MaterialPageRoute(builder: (context) => Home()));
   clearControllers();
+  clearErrors();
 }
 
 // Очистка контроллеров
@@ -33,6 +36,13 @@ void clearControllers() {
   emailController.clear();
   passwordController.clear();
   nameController.clear();
+}
+
+//
+void clearErrors() {
+  emailError = null;
+  nameError = null;
+  passwordError = null;
 }
 
 // Контроллеры
@@ -44,4 +54,3 @@ TextEditingController nameController = TextEditingController();
 String? emailError;
 String? passwordError;
 String? nameError;
-

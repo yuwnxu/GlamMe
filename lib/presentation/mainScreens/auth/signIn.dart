@@ -100,7 +100,7 @@ class _SignInState extends State<SignIn> {
                 ),
                 SizedBox(height: 35),
                 CustomButton(
-                  textButton: 'Войти',
+                  textButton: 'Вход',
                   colorButton: black,
                   widthButton: 352,
                   heightButton: 56,
