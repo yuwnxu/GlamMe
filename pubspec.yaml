@@ -15,6 +15,13 @@ dependencies:
   google_fonts: ^8.0.2
   flutter_svg: ^2.2.4
 
+  # Библиотека для сетевого слоя
+  service_glamme:
+    git:
+      url: https://github.com/eclpze/Service_GlamMe
+      ref: master
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
