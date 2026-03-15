@@ -46,9 +46,13 @@ class _ProfileState extends State<Profile> {
             padding: EdgeInsets.all(30),
             child: Row(
               children: [
-                SvgPicture.asset('assets/icons/arrow.svg'),
+                GestureDetector(
+                    onTap: (){
+                      Navigator.pop(context);
+                    },
+                    child: SvgPicture.asset('assets/icons/arrow.svg')),
                 Spacer(),
-                Text('Профиль', style: GoogleFonts.sulphurPoint(fontSize: 16, fontWeight: FontWeight.bold, color: title),),
+                Text('Профиль', style: GoogleFonts.sulphurPoint(fontSize: 20, fontWeight: FontWeight.bold, color: title),),
                 Spacer(),
               ],
             ),
