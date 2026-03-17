@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:glamme/presentation/uikit/colors.dart';
 import 'package:glamme/presentation/uikit/custom_textfield.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../../domain/globals.dart';
 import '../../uikit/custom_button.dart';
 
@@ -71,7 +70,7 @@ class _ProfileState extends State<Profile> {
                   colorFocus: black,
                   colorError: error,
                   title: 'Имя',
-                  hintText: '',
+                  hintText: 'name',
                   errorText: nameError,
                   borderRadius: 15,
                   colorCursor: black,

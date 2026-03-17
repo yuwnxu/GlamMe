@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:glamme/data/data.dart';
 import 'package:glamme/domain/globals.dart';
 import 'package:glamme/presentation/uikit/colors.dart';
 import 'package:glamme/presentation/uikit/custom_button.dart';
@@ -62,13 +63,7 @@ class _SignInState extends State<SignIn> {
                 Row(
                   children: [
                     Spacer(),
-                    Text(
-                      'Вход',
-                      style: GoogleFonts.sulphurPoint(
-                        color: gray,
-                        fontSize: 28,
-                      ),
-                    ),
+                    Text('Вход', style: GoogleFonts.sulphurPoint(color: gray, fontSize: 28)),
                     Spacer(),
                   ],
                 ),
@@ -103,12 +98,12 @@ class _SignInState extends State<SignIn> {
                   textButton: 'Вход',
                   colorButton: black,
                   widthButton: 352,
-                  heightButton: 56,
+                  heightButton: 47,
                   borderRadius: 20,
                   onButton: () {
                     test();
                     if (emailError == null && passwordError == null) {
-                      navToHome(context);
+                      authUser(context);
                     } else {
                       if (mounted) {
                         setState(() {});
@@ -120,19 +115,12 @@ class _SignInState extends State<SignIn> {
                 RichText(
                   text: TextSpan(
                     text: 'Нет аккаунта? ',
-                    style: GoogleFonts.sulphurPoint(
-                      fontSize: 17,
-                      color: hintText,
-                    ),
+                    style: GoogleFonts.sulphurPoint(fontSize: 15, color: hintText),
                     children: [
                       TextSpan(
                         text: 'Регистрация',
-                        style: GoogleFonts.sulphurPoint(
-                          fontSize: 17,
-                          color: black,
-                        ),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () => navToReg(context),
+                        style: GoogleFonts.sulphurPoint(fontSize: 15, color: black),
+                        recognizer: TapGestureRecognizer()..onTap = () => navToReg(context),
                       ),
                     ],
                   ),
