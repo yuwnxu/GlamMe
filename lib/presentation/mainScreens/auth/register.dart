@@ -127,7 +127,7 @@ class _RegisterState extends State<Register> {
                   onButton: () {
                     test();
                     if (emailError == null && passwordError == null && nameError == null) {
-                      regUser(context);
+                      // regUser(context);
                     } else {
                       if (mounted) {
                         setState(() {});

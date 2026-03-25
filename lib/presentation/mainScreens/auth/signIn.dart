@@ -103,7 +103,7 @@ class _SignInState extends State<SignIn> {
                   onButton: () {
                     test();
                     if (emailError == null && passwordError == null) {
-                      authUser(context);
+                      // authUser(context);
                     } else {
                       if (mounted) {
                         setState(() {});

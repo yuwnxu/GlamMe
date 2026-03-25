@@ -24,7 +24,7 @@ class _HomeState extends State<Home> {
 
   //
   void loadCategories() async {
-    postCategories();
+    // postCategories();
     setState(() {});
   }
 
@@ -84,7 +84,7 @@ class _HomeState extends State<Home> {
                         selectedCategories = index;
                       });
                       animateToCategory();
-                      loadProducts();
+                      // loadProducts();
                     },
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
