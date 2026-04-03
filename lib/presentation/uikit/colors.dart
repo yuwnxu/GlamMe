@@ -10,3 +10,4 @@ Color border = Color(0xffD1D1D1);
 Color black = Color(0xff151515);
 Color error = Color(0xffEF3030);
 Color title =  Color(0xFF504949);
+Color unSelectedCategory = Color(0xffAA9E9E);

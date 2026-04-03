@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:glamme/data/data.dart';
 import 'package:glamme/domain/globals.dart';
 import 'package:glamme/presentation/uikit/colors.dart';
 import 'package:glamme/presentation/uikit/custom_button.dart';
@@ -15,6 +16,8 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  //
+  @override
   void initState() {
     super.initState();
     emailController.addListener(updateWidget);
@@ -22,10 +25,12 @@ class _RegisterState extends State<Register> {
     nameController.addListener(updateWidget);
   }
 
+  //
   void updateWidget() {
     setState(() {});
   }
 
+  //
   @override
   void dispose() {
     super.dispose();
@@ -34,6 +39,7 @@ class _RegisterState extends State<Register> {
     nameController.removeListener(updateWidget);
   }
 
+  //
   void test() {
     setState(() {
       if (emailController.text.isEmpty) {
@@ -68,13 +74,7 @@ class _RegisterState extends State<Register> {
                 Row(
                   children: [
                     Spacer(),
-                    Text(
-                      'Регистрация',
-                      style: GoogleFonts.sulphurPoint(
-                        color: gray,
-                        fontSize: 28,
-                      ),
-                    ),
+                    Text('Регистрация', style: GoogleFonts.sulphurPoint(color: gray, fontSize: 28)),
                     Spacer(),
                   ],
                 ),
@@ -122,14 +122,12 @@ class _RegisterState extends State<Register> {
                   textButton: 'Регистрация',
                   colorButton: black,
                   widthButton: 352,
-                  heightButton: 56,
+                  heightButton: 47,
                   borderRadius: 20,
                   onButton: () {
                     test();
-                    if (emailError == null &&
-                        passwordError == null &&
-                        nameError == null) {
-                      navToHome(context);
+                    if (emailError == null && passwordError == null && nameError == null) {
+                      // regUser(context);
                     } else {
                       if (mounted) {
                         setState(() {});
@@ -141,19 +139,12 @@ class _RegisterState extends State<Register> {
                 RichText(
                   text: TextSpan(
                     text: 'Есть аккаунт? ',
-                    style: GoogleFonts.sulphurPoint(
-                      fontSize: 17,
-                      color: hintText,
-                    ),
+                    style: GoogleFonts.sulphurPoint(fontSize: 15, color: hintText),
                     children: [
                       TextSpan(
                         text: 'Войти',
-                        style: GoogleFonts.sulphurPoint(
-                          fontSize: 17,
-                          color: black,
-                        ),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () => navToSignIn(context),
+                        style: GoogleFonts.sulphurPoint(fontSize: 15, color: black),
+                        recognizer: TapGestureRecognizer()..onTap = () => navToSignIn(context),
                       ),
                     ],
                   ),

@@ -35,7 +35,7 @@ class CustomButton extends StatelessWidget {
       ),
       child: Text(
         textButton,
-        style: GoogleFonts.sulphurPoint(fontSize: 19, color: white),
+        style: GoogleFonts.sulphurPoint(fontSize: 12, color: white),
       ),
     );
   }
