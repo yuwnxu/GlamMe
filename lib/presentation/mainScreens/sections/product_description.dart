@@ -45,20 +45,6 @@ class _ProductPageState extends State<ProductPage> {
                     child: Icon(Icons.arrow_back_ios, size: 18),
                   ),
                   Spacer(),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        toggleFavorite(widget.id);
-                      });
-                    },
-                    child: SvgPicture.asset(
-                      isFavorite(widget.id)
-                          ? 'assets/icons/heart-filled.svg'
-                          : 'assets/icons/heart-not-filled.svg',
-                      width: 20,
-                      height: 20,
-                    ),
-                  ),
                 ],
               ),
             ),
@@ -116,7 +102,7 @@ class _ProductPageState extends State<ProductPage> {
               ),
               child: Text(
                 'ДОБАВЛЕНО',
-                style: GoogleFonts.sulphurPoint(fontSize: 12, color: black),
+                style: GoogleFonts.sulphurPoint(fontSize: 12, color: black, fontWeight: FontWeight.w600),
               ),
             )
                 : CustomButton(

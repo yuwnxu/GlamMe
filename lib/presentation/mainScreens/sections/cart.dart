@@ -83,120 +83,123 @@ class _CartState extends State<Cart> {
                         setState(() {});
                       });
                     },
-                    child: Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+                    child: Padding(
                       padding: const EdgeInsets.all(15),
-                      decoration: BoxDecoration(
-                        color: white,
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: [
-                          BoxShadow(
-                            color: gray.withOpacity(0.1),
-                            spreadRadius: 0,
-                            blurRadius: 4,
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: Image.asset(
-                              product['image']!,
-                              width: 80,
-                              height: 80,
-                              fit: BoxFit.cover,
+                      child: Container(
+                        height: 130,
+                        padding: const EdgeInsets.all(15),
+                        decoration: BoxDecoration(
+                          color: white,
+                          borderRadius: BorderRadius.circular(12),
+                          boxShadow: [
+                            BoxShadow(
+                              color: gray.withOpacity(0.1),
+                              spreadRadius: 0,
+                              blurRadius: 4,
                             ),
-                          ),
-                          const SizedBox(width: 15),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  product['name']!,
-                                  style: GoogleFonts.sulphurPoint(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: title,
-                                  ),
-                                ),
-                                const SizedBox(height: 4),
-                                Text(
-                                  product['category']!,
-                                  style: GoogleFonts.sulphurPoint(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                    color: const Color(0xffAA9E9E),
-                                  ),
-                                ),
-                                const SizedBox(height: 4),
-                                Text(
-                                  '${product['price']}р',
-                                  style: GoogleFonts.sulphurPoint(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w600,
-                                    color: title,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          // Счетчик количества
-                          Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.grey.shade300),
+                          ],
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            ClipRRect(
                               borderRadius: BorderRadius.circular(8),
+                              child: Image.asset(
+                                product['image']!,
+                                width: 80,
+                                height: 80,
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                            child: Row(
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      removeFromCart(productId);
-                                    });
-                                  },
-                                  child: Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                                    child: const Text(
-                                      '-',
-                                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                            const SizedBox(width: 15),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    product['name']!,
+                                    style: GoogleFonts.sulphurPoint(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: title,
                                     ),
                                   ),
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                                  decoration: BoxDecoration(
-                                    border: Border(
-                                      left: BorderSide(color: Colors.grey.shade300),
-                                      right: BorderSide(color: Colors.grey.shade300),
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    product['category']!,
+                                    style: GoogleFonts.sulphurPoint(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400,
+                                      color: const Color(0xffAA9E9E),
                                     ),
                                   ),
-                                  child: Text(
-                                    '$quantity',
-                                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      addToCart(productId);
-                                    });
-                                  },
-                                  child: Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                                    child: const Text(
-                                      '+',
-                                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    '${product['price']}р',
+                                    style: GoogleFonts.sulphurPoint(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w600,
+                                      color: title,
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                            // Счетчик количества
+                            Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey.shade300),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Row(
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        removeFromCart(productId);
+                                      });
+                                    },
+                                    child: Container(
+                                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                                      child: const Text(
+                                        '-',
+                                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                                    decoration: BoxDecoration(
+                                      border: Border(
+                                        left: BorderSide(color: Colors.grey.shade300),
+                                        right: BorderSide(color: Colors.grey.shade300),
+                                      ),
+                                    ),
+                                    child: Text(
+                                      '$quantity',
+                                      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        addToCart(productId);
+                                      });
+                                    },
+                                    child: Container(
+                                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                                      child: const Text(
+                                        '+',
+                                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   );
@@ -241,20 +244,50 @@ class _CartState extends State<Cart> {
                       onButton: () {
                         showDialog(
                           context: context,
-                          builder: (context) => AlertDialog(
-                            title: const Text('Заказ оформлен!'),
-                            content: const Text('Спасибо за покупку!'),
-                            actions: [
-                              TextButton(
-                                onPressed: () {
-                                  setState(() {
-                                    cartItems.clear();
-                                  });
-                                  Navigator.pop(context);
-                                },
-                                child: const Text('OK'),
+                          builder: (context) => Dialog(
+                            backgroundColor: Colors.transparent,
+                            child: Container(
+                              width: 300,
+                              height: 250,
+                              decoration: BoxDecoration(
+                                color: white,
+                                borderRadius: BorderRadius.circular(20),
                               ),
-                            ],
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const SizedBox(height: 20),
+                                  Text(
+                                    'Заказ успешно\nоформлен!',
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.sulphurPoint(
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold,
+                                      color: title,
+                                    ),
+                                  ),
+                                  Image.asset(
+                                    'assets/images/success_man.png',
+                                    width: 90,
+                                    height: 90,
+                                  ),
+                                  CustomButton(
+                                    textButton: 'НА ГЛАВНУЮ',
+                                    colorButton: black,
+                                    widthButton: 175,
+                                    heightButton: 45,
+                                    borderRadius: 20,
+                                    onButton: () {
+                                      setState(() {
+                                        cartItems.clear();
+                                      });
+                                      navToHome(context);
+                                    },
+                                  ),
+                                  const SizedBox(height: 20),
+                                ],
+                              ),
+                            ),
                           ),
                         );
                       },
