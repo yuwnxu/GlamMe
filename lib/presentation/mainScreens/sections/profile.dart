@@ -42,18 +42,14 @@ class _ProfileState extends State<Profile> {
       Column(
         children: [
           Padding(
-            padding: EdgeInsets.all(30),
-            child: Row(
-              children: [
-                GestureDetector(
-                    onTap: (){
-                      Navigator.pop(context);
-                    },
-                    child: SvgPicture.asset('assets/icons/arrow.svg')),
-                Spacer(),
-                Text('Профиль', style: GoogleFonts.sulphurPoint(fontSize: 20, fontWeight: FontWeight.bold, color: title),),
-                Spacer(),
-              ],
+            padding: EdgeInsets.all(20),
+            child: Text(
+              'Профиль',
+              style: GoogleFonts.sulphurPoint(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: title,
+              ),
             ),
           ),
           SizedBox(height: 50,),

@@ -39,6 +39,7 @@ class _CategoriesState extends State<Categories> with TickerProviderStateMixin {
       body: SafeArea(
         child: Column(
           children: [
+            SizedBox(height: 30),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25),
               child: Row(
@@ -52,17 +53,16 @@ class _CategoriesState extends State<Categories> with TickerProviderStateMixin {
                   Expanded(
                     child: Center(
                       child: Text(
-                        'Категории',
-                        style: GoogleFonts.sulphurPoint(fontSize: 18, fontWeight: FontWeight.bold, color: title),
+                        'Каталог',
+                        style: GoogleFonts.sulphurPoint(fontSize: 20, fontWeight: FontWeight.bold, color: title),
                       ),
                     ),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 40),
             SizedBox(
-              height: 30,
+              height: 10,
               child: ListView.builder(
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
@@ -106,7 +106,13 @@ class _CategoriesState extends State<Categories> with TickerProviderStateMixin {
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1, crossAxisSpacing: 12, mainAxisSpacing: 12),
                     itemCount: 6,
                     itemBuilder: (context, index) {
-                      return Product(image: 'assets/images/cream.png', name: 'Крем для лица', category: 'Уход', price: '1000');
+                      return Product(
+                        id: '1',
+                        image: 'assets/images/cream.png',
+                        name: 'Крем для лица',
+                        category: 'Уход',
+                        price: '1000',
+                      );
                     },
                   ),
                   GridView.builder(
@@ -114,7 +120,13 @@ class _CategoriesState extends State<Categories> with TickerProviderStateMixin {
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1, crossAxisSpacing: 12, mainAxisSpacing: 12),
                     itemCount: 6,
                     itemBuilder: (context, index) {
-                      return Product(image: 'assets/images/cream.png', name: 'Крем для лица', category: 'Уход', price: '1000');
+                      return Product(
+                        id: '1',
+                        image: 'assets/images/cream.png',
+                        name: 'Крем для лица',
+                        category: 'Уход',
+                        price: '1000',
+                      );
                     },
                   ),
                   GridView.builder(
@@ -122,7 +134,13 @@ class _CategoriesState extends State<Categories> with TickerProviderStateMixin {
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1, crossAxisSpacing: 12, mainAxisSpacing: 12),
                     itemCount: 6,
                     itemBuilder: (context, index) {
-                      return Product(image: 'assets/images/cream.png', name: 'Крем для лица', category: 'Уход', price: '1000');
+                      return Product(
+                        id: '1',
+                        image: 'assets/images/cream.png',
+                        name: 'Крем для лица',
+                        category: 'Уход',
+                        price: '1000',
+                      );
                     },
                   ),
                 ],

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:glamme/data/data.dart';
 import 'package:glamme/domain/globals.dart';
 import 'package:glamme/presentation/uikit/colors.dart';
 import 'package:glamme/presentation/uikit/product.dart';
@@ -35,7 +34,7 @@ class _HomeState extends State<Home> {
       body: SafeArea(
         child: Column(
           children: [
-            SizedBox(height: 20),
+            SizedBox(height: 30),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Column(
@@ -54,7 +53,7 @@ class _HomeState extends State<Home> {
                   Row(
                     children: [
                       Text(
-                        'Категории',
+                        'Каталог',
                         style: GoogleFonts.sulphurPoint(fontSize: 18, fontWeight: FontWeight.bold, color: title),
                       ),
                       Spacer(),
@@ -69,7 +68,6 @@ class _HomeState extends State<Home> {
                 ],
               ),
             ),
-            SizedBox(height: 40),
             SizedBox(
               height: 35,
               child: ListView.builder(
@@ -110,7 +108,13 @@ class _HomeState extends State<Home> {
                 children: [
                   ListView.builder(
                     itemBuilder: (context, index) {
-                      return Product(image: 'assets/images/cream.png', name: 'Крем для лица', category: 'Уход', price: '1000');
+                      return Product(
+                        id: '1',
+                        image: 'assets/images/cream.png',
+                        name: 'Крем для лица',
+                        category: 'Уход',
+                        price: '1000',
+                      );
                     },
                     itemCount: 3,
                     scrollDirection: Axis.horizontal,
@@ -118,7 +122,13 @@ class _HomeState extends State<Home> {
                   ),
                   ListView.builder(
                     itemBuilder: (context, index) {
-                      return Product(image: 'assets/images/cream.png', name: 'Крем для лица', category: 'Уход', price: '1000');
+                      return Product(
+                        id: '1',
+                        image: 'assets/images/cream.png',
+                        name: 'Крем для лица',
+                        category: 'Уход',
+                        price: '1000',
+                      );
                     },
                     itemCount: 3,
                     scrollDirection: Axis.horizontal,
@@ -126,7 +136,13 @@ class _HomeState extends State<Home> {
                   ),
                   ListView.builder(
                     itemBuilder: (context, index) {
-                      return Product(image: 'assets/images/cream.png', name: 'Крем для лица', category: 'Уход', price: '1000');
+                      return Product(
+                        id: '1',
+                        image: 'assets/images/cream.png',
+                        name: 'Крем для лица',
+                        category: 'Уход',
+                        price: '1000',
+                      );
                     },
                     itemCount: 3,
                     scrollDirection: Axis.horizontal,
@@ -151,7 +167,13 @@ class _HomeState extends State<Home> {
               child: ListView.builder(
                 itemCount: 3,
                 itemBuilder: (context, index) {
-                  return ProductCard(image: 'assets/images/cream.png', name: 'Крем для лица', category: 'Уход', price: '10.000р');
+                  return ProductCard(
+                    id: '1',
+                    image: 'assets/images/cream.png',
+                    name: 'Крем для лица',
+                    category: 'Уход',
+                    price: '10.000',
+                  );
                 },
               ),
             ),

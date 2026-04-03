@@ -1,18 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:glamme/domain/globals.dart';
 import 'package:glamme/presentation/mainScreens/sections/product_description.dart';
-import 'package:glamme/presentation/mainScreens/sections/profile.dart';
 import 'package:glamme/presentation/uikit/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
-//
 class Product extends StatefulWidget {
+  final String id;
   final String image;
   final String name;
   final String category;
   final String price;
 
-  const Product({super.key, required this.image, required this.name, required this.category, required this.price});
+  const Product({
+    super.key,
+    required this.id,
+    required this.image,
+    required this.name,
+    required this.category,
+    required this.price
+  });
 
   @override
   State<Product> createState() => _ProductState();
@@ -32,7 +39,15 @@ class _ProductState extends State<Product> {
       width: MediaQuery.of(context).size.width * 0.75,
       child: GestureDetector(
         onTap: () {
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProductPage()));
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => ProductPage(
+                id: widget.id,
+                image: widget.image,
+                name: widget.name,
+                category: widget.category,
+                price: widget.price,
+              )
+          ));
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,7 +58,7 @@ class _ProductState extends State<Product> {
                 children: [
                   Center(
                     child: Image.asset(
-                     widget.image,
+                      widget.image,
                       height: 200,
                       width: 350,
                       fit: BoxFit.contain,
@@ -53,8 +68,18 @@ class _ProductState extends State<Product> {
                     top: 0,
                     left: 0,
                     child: GestureDetector(
-                      onTap: () {},
-                      child: Image.asset('assets/images/favorite.png', width: 20),
+                      onTap: () {
+                        setState(() {
+                          toggleFavorite(widget.id);
+                        });
+                      },
+                      child: SvgPicture.asset(
+                        isFavorite(widget.id)
+                            ? 'assets/icons/heart-filled.svg'
+                            : 'assets/icons/heart-not-filled.svg',
+                        width: 20,
+                        height: 20,
+                      ),
                     ),
                   ),
                 ],

@@ -115,3 +115,86 @@ void initPrefs() async {
 
 late SharedPreferences prefs;
 
+// Список избранных товаров
+List<String> favoriteIds = [];
+
+// Проверка: в избранном ли товар
+bool isFavorite(String id) {
+  return favoriteIds.contains(id);
+}
+
+// Добавить/удалить из избранного
+void toggleFavorite(String id) {
+  if (isFavorite(id)) {
+    favoriteIds.remove(id);
+  } else {
+    favoriteIds.add(id);
+  }
+}
+
+
+// Список товаров
+List<Map<String, String>> allProducts = [
+  {
+    'id': '1',
+    'image': 'assets/images/cream.png',
+    'name': 'Крем для лица',
+    'category': 'Уход',
+    'price': '1000',
+  },
+
+];
+
+// Функция получения товара по id
+Map<String, String>? getProductById(String id) {
+  try {
+    return allProducts.firstWhere((product) => product['id'] == id);
+  } catch (e) {
+    return null;
+  }
+}
+
+
+// Список товаров в корзине (храним id и количество)
+Map<String, int> cartItems = {};
+
+// Добавить товар в корзину
+void addToCart(String id) {
+  if (cartItems.containsKey(id)) {
+    cartItems[id] = cartItems[id]! + 1;
+  } else {
+    cartItems[id] = 1;
+  }
+}
+
+// Удалить товар из корзины
+void removeFromCart(String id) {
+  if (cartItems.containsKey(id)) {
+    cartItems[id] = cartItems[id]! - 1;
+    if (cartItems[id] == 0) {
+      cartItems.remove(id);
+    }
+  }
+}
+
+// Получить количество товара в корзине
+int getCartQuantity(String id) {
+  return cartItems[id] ?? 0;
+}
+
+// Проверить, есть ли товар в корзине
+bool isInCart(String id) {
+  return cartItems.containsKey(id);
+}
+
+// Получить общую сумму корзины
+int getTotalPrice() {
+  int total = 0;
+  cartItems.forEach((id, quantity) {
+    final product = getProductById(id);
+    if (product != null) {
+      total += int.parse(product['price']!) * quantity;
+    }
+  });
+  return total;
+}
