@@ -16,7 +16,6 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  //
   @override
   void initState() {
     super.initState();
@@ -25,12 +24,10 @@ class _RegisterState extends State<Register> {
     nameController.addListener(updateWidget);
   }
 
-  //
   void updateWidget() {
     setState(() {});
   }
 
-  //
   @override
   void dispose() {
     super.dispose();
@@ -39,25 +36,61 @@ class _RegisterState extends State<Register> {
     nameController.removeListener(updateWidget);
   }
 
-  //
   void test() {
     setState(() {
-      if (emailController.text.isEmpty) {
-        emailError = 'Введите почту!';
-      } else {
-        emailError = null;
-      }
-      if (passwordController.text.isEmpty) {
-        passwordError = 'Введите пароль!';
-      } else {
-        passwordError = null;
-      }
       if (nameController.text.isEmpty) {
         nameError = 'Введите имя!';
       } else {
         nameError = null;
       }
+
+      if (emailController.text.isEmpty) {
+        emailError = 'Введите почту!';
+      } else if (!emailController.text.contains('@')) {
+        emailError = 'Введите корректную почту (должна содержать @)';
+      } else {
+        emailError = null;
+      }
+
+      if (passwordController.text.isEmpty) {
+        passwordError = 'Введите пароль!';
+      } else if (passwordController.text.length < 6) {
+        passwordError = 'Пароль должен быть не менее 6 символов';
+      } else {
+        passwordError = null;
+      }
     });
+  }
+
+  void localRegister() async { // локальная регистрация
+    test();
+
+    if (emailError == null && passwordError == null && nameError == null) {
+      await prefs.setString('email', emailController.text);
+      await prefs.setString('password', passwordController.text);
+      await prefs.setString('name', nameController.text);
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Регистрация прошла успешно!'),
+            backgroundColor: Colors.green,
+            duration: Duration(seconds: 1),
+          ),
+        );
+        navToHome(context);
+      }
+    } else {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Исправьте ошибки в форме'),
+            backgroundColor: error,
+            duration: Duration(seconds: 2),
+          ),
+        );
+      }
+    }
   }
 
   @override
@@ -119,20 +152,13 @@ class _RegisterState extends State<Register> {
                 ),
                 SizedBox(height: 35),
                 CustomButton(
-                  textButton: 'Регистрация',
+                  textButton: 'РЕГИСТРАЦИЯ',
                   colorButton: black,
                   widthButton: 352,
                   heightButton: 47,
                   borderRadius: 20,
                   onButton: () {
-                    test();
-                    if (emailError == null && passwordError == null && nameError == null) {
-                      // regUser(context);
-                    } else {
-                      if (mounted) {
-                        setState(() {});
-                      }
-                    }
+                    localRegister();
                   },
                 ),
                 SizedBox(height: 15),

@@ -38,15 +38,63 @@ class _SignInState extends State<SignIn> {
     setState(() {
       if (emailController.text.isEmpty) {
         emailError = 'Введите почту!';
+      } else if (!emailController.text.contains('@')) {
+        emailError = 'Введите корректную почту';
       } else {
         emailError = null;
       }
+
       if (passwordController.text.isEmpty) {
         passwordError = 'Введите пароль!';
+      } else if (passwordController.text.length < 6) {
+        passwordError = 'Пароль должен быть не менее 6 символов';
       } else {
         passwordError = null;
       }
     });
+  }
+
+  void localSignIn() async { // локальный вход
+    test();
+
+    if (emailError == null && passwordError == null) {
+      String? savedEmail = prefs.getString('email');
+      String? savedPassword = prefs.getString('password');
+
+      if (emailController.text == savedEmail && passwordController.text == savedPassword) {
+
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Вход выполнен!'),
+              backgroundColor: Colors.green,
+              duration: Duration(seconds: 1),
+            ),
+          );
+          navToHome(context);
+        }
+      } else {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Неверная почта или пароль'),
+              backgroundColor: error,
+              duration: Duration(seconds: 2),
+            ),
+          );
+        }
+      }
+    } else {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Исправьте ошибки в форме'),
+            backgroundColor: error,
+            duration: Duration(seconds: 2),
+          ),
+        );
+      }
+    }
   }
 
   @override
@@ -95,20 +143,13 @@ class _SignInState extends State<SignIn> {
                 ),
                 SizedBox(height: 35),
                 CustomButton(
-                  textButton: 'Вход',
+                  textButton: 'ВОЙТИ',
                   colorButton: black,
                   widthButton: 352,
                   heightButton: 47,
                   borderRadius: 20,
                   onButton: () {
-                    test();
-                    if (emailError == null && passwordError == null) {
-                      // authUser(context);
-                    } else {
-                      if (mounted) {
-                        setState(() {});
-                      }
-                    }
+                    localSignIn();
                   },
                 ),
                 SizedBox(height: 15),

@@ -198,3 +198,46 @@ int getTotalPrice() {
   });
   return total;
 }
+
+// Сохранение данных пользователя
+Future<void> saveAuth() async {
+  await prefs.setString('name', nameController.text);
+  await prefs.setString('email', emailController.text);
+  await prefs.setString('password', passwordController.text);
+}
+
+// Выход из профиля
+void logout(BuildContext context) {
+  navToSignIn(context);
+}
+
+// Валидация email
+void validEmail() {
+  if (emailController.text.isEmpty) {
+    emailError = 'Введите почту';
+  } else if (!emailController.text.contains('@')) {
+    emailError = 'Введите корректную почту';
+  } else {
+    emailError = null;
+  }
+}
+
+// Валидация имени
+void validName() {
+  if (nameController.text.isEmpty) {
+    nameError = 'Введите имя';
+  } else {
+    nameError = null;
+  }
+}
+
+// Валидация пароля
+void validPassword() {
+  if (passwordController.text.isEmpty) {
+    passwordError = 'Введите пароль';
+  } else if (passwordController.text.length < 6) {
+    passwordError = 'Пароль должен быть не менее 6 символов';
+  } else {
+    passwordError = null;
+  }
+}

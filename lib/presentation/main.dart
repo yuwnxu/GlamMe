@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'GlamMe',
       debugShowCheckedModeBanner: false,
-      home: MainPage(),
+      home: const SplashScreen(),
     );
   }
 }
@@ -33,12 +33,18 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
-
-  //
   void initState() {
     super.initState();
-    initPrefs();
-    Future.delayed(Duration(seconds: 2), () => navToSignIn(context));
+    Future.delayed(const Duration(seconds: 2), () {
+      final isLoggedIn = prefs.getString('email') != null &&
+          prefs.getString('password') != null;
+
+      if (isLoggedIn) {
+        navToHome(context);
+      } else {
+        navToSignIn(context);
+      }
+    });
   }
 
   @override
@@ -47,7 +53,11 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: background,
       body: SafeArea(
         child: Center(
-          child: Image.asset('assets/images/logo.png', width: 140, height: 160),
+          child: Image.asset(
+            'assets/images/logo.png',
+            width: 140,
+            height: 160,
+          ),
         ),
       ),
     );

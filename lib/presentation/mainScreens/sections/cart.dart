@@ -6,6 +6,7 @@ import 'package:glamme/presentation/uikit/colors.dart';
 import 'package:glamme/presentation/uikit/custom_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+// Экран Корзина
 class Cart extends StatefulWidget {
   const Cart({super.key});
 
@@ -247,8 +248,8 @@ class _CartState extends State<Cart> {
                           builder: (context) => Dialog(
                             backgroundColor: Colors.transparent,
                             child: Container(
-                              width: 300,
-                              height: 250,
+                              width: 270,
+                              height: 190,
                               decoration: BoxDecoration(
                                 color: white,
                                 borderRadius: BorderRadius.circular(20),
@@ -265,11 +266,6 @@ class _CartState extends State<Cart> {
                                       fontWeight: FontWeight.bold,
                                       color: title,
                                     ),
-                                  ),
-                                  Image.asset(
-                                    'assets/images/success_man.png',
-                                    width: 90,
-                                    height: 90,
                                   ),
                                   CustomButton(
                                     textButton: 'НА ГЛАВНУЮ',

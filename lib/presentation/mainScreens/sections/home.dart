@@ -15,7 +15,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final nameUser = prefs.getString('name') ?? 'User';
+  final nameUser = prefs.getString('name') ?? 'Пользователь';
 
   List<Map<String, dynamic>> categories = [
     {'name': 'Акции'},
@@ -29,25 +29,6 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-  }
-
-  void loadCategories() async {
-    setState(() {
-      isLoading = true;
-    });
-
-    try {
-      await Future.delayed(Duration(seconds: 1));
-
-      setState(() {
-        categories = categoryList.cast<Map<String, dynamic>>();
-        isLoading = false;
-      });
-    } catch (e) {
-      setState(() {
-        isLoading = false;
-      });
-    }
   }
 
   @override
@@ -120,6 +101,7 @@ class _HomeState extends State<Home> {
               ),
               SizedBox(height: 25),
 
+              // список категорий
               SizedBox(
                 height: 40,
                 child: ListView.builder(
@@ -174,7 +156,7 @@ class _HomeState extends State<Home> {
                     return ListView.builder(
                       itemBuilder: (context, productIndex) {
                         return Product(
-                          id: '${index}_$productIndex',
+                          id: '1',
                           image: 'assets/images/cream.png',
                           name: 'Крем для лица',
                           category: categories[index]['name'],
@@ -215,7 +197,7 @@ class _HomeState extends State<Home> {
                   itemCount: 3,
                   itemBuilder: (context, index) {
                     return ProductCard(
-                      id: 'popular_$index',
+                      id: '1',
                       image: 'assets/images/cream.png',
                       name: 'Крем для лица',
                       category: 'Уход',

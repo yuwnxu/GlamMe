@@ -11,3 +11,4 @@ Color black = Color(0xff151515);
 Color error = Color(0xffEF3030);
 Color title =  Color(0xFF504949);
 Color unSelectedCategory = Color(0xffAA9E9E);
+Color success = Color(0xff06BB02);
