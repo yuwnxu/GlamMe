@@ -178,7 +178,7 @@ class _ProfileState extends State<Profile> {
                       setState(() {});
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text('Данные обновлены! ✨'),
+                          content: Text('Данные обновлены!'),
                           backgroundColor: success,
                           duration: Duration(seconds: 2),
                         ),

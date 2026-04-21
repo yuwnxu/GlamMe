@@ -15,10 +15,17 @@ class Categories extends StatefulWidget {
 class _CategoriesState extends State<Categories> with TickerProviderStateMixin {
   late TabController tabController;
 
+  List<Map<String, dynamic>> categories = [
+    {'name': 'Акции'},
+    {'name': 'Макияж'},
+    {'name': 'Уход'},
+    {'name': 'Прочее'},
+  ];
+
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length: categoryList.length, vsync: this);
+    tabController = TabController(length: categories.length, vsync: this);
     tabController.addListener(() {
       setState(() {
         selectedCategories = tabController.index;
@@ -61,12 +68,13 @@ class _CategoriesState extends State<Categories> with TickerProviderStateMixin {
                 ],
               ),
             ),
+            SizedBox(height: 40,),
             SizedBox(
-              height: 10,
+              height: 50,
               child: ListView.builder(
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
-                itemCount: categoryList.length,
+                itemCount: categories.length,
                 itemBuilder: (context, index) {
                   bool isSelected = selectedCategories == index;
                   return GestureDetector(
@@ -77,21 +85,25 @@ class _CategoriesState extends State<Categories> with TickerProviderStateMixin {
                       animateToCategory();
                     },
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                       margin: const EdgeInsets.symmetric(horizontal: 10),
                       decoration: BoxDecoration(
-                        border: Border(bottom: isSelected ? BorderSide(color: black) : BorderSide.none),
+                        border: Border(bottom: isSelected ? BorderSide(color: black, width: 2) : BorderSide.none),
                       ),
                       child: Text(
-                        categoryList[index]['name'],
-                        style: GoogleFonts.sulphurPoint(fontSize: 16, fontWeight: FontWeight.bold, color: isSelected ? black : unSelectedCategory),
+                        categories[index]['name'],
+                        style: GoogleFonts.sulphurPoint(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: isSelected ? black : unSelectedCategory,
+                        ),
                       ),
                     ),
                   );
                 },
               ),
             ),
-            SizedBox(height: 30),
+            SizedBox(height: 20),
             Expanded(
               child: PageView(
                 controller: categoryController,
@@ -101,45 +113,84 @@ class _CategoriesState extends State<Categories> with TickerProviderStateMixin {
                   });
                 },
                 children: [
+                  // Акции
                   GridView.builder(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1, crossAxisSpacing: 12, mainAxisSpacing: 12),
-                    itemCount: 6,
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 1,
+                      crossAxisSpacing: 12,
+                      mainAxisSpacing: 12,
+                    ),
+                    itemCount: getSaleProducts().length,
                     itemBuilder: (context, index) {
+                      final product = getSaleProducts()[index];
                       return Product(
-                        id: '1',
-                        image: 'assets/images/cream.png',
-                        name: 'Крем для лица',
-                        category: 'Уход',
-                        price: '1000',
+                        id: product['id']!,
+                        image: product['image']!,
+                        name: product['name']!,
+                        category: product['category']!,
+                        price: product['price']!,
+                        oldPrice: product['oldPrice'] ?? '',
                       );
                     },
                   ),
+                  // Макияж
                   GridView.builder(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1, crossAxisSpacing: 12, mainAxisSpacing: 12),
-                    itemCount: 6,
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 1,
+                      crossAxisSpacing: 12,
+                      mainAxisSpacing: 12,
+                    ),
+                    itemCount: getProductsByCategory('Макияж').length,
                     itemBuilder: (context, index) {
+                      final product = getProductsByCategory('Макияж')[index];
                       return Product(
-                        id: '1',
-                        image: 'assets/images/cream.png',
-                        name: 'Крем для лица',
-                        category: 'Уход',
-                        price: '1000',
+                        id: product['id']!,
+                        image: product['image']!,
+                        name: product['name']!,
+                        category: product['category']!,
+                        price: product['price']!,
                       );
                     },
                   ),
+                  // Уход
                   GridView.builder(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1, crossAxisSpacing: 12, mainAxisSpacing: 12),
-                    itemCount: 6,
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 1,
+                      crossAxisSpacing: 12,
+                      mainAxisSpacing: 12,
+                    ),
+                    itemCount: getProductsByCategory('Уход').length,
                     itemBuilder: (context, index) {
+                      final product = getProductsByCategory('Уход')[index];
                       return Product(
-                        id: '1',
-                        image: 'assets/images/cream.png',
-                        name: 'Крем для лица',
-                        category: 'Уход',
-                        price: '1000',
+                        id: product['id']!,
+                        image: product['image']!,
+                        name: product['name']!,
+                        category: product['category']!,
+                        price: product['price']!,
+                      );
+                    },
+                  ),
+                  // Прочее
+                  GridView.builder(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 1,
+                      crossAxisSpacing: 12,
+                      mainAxisSpacing: 12,
+                    ),
+                    itemCount: getProductsByCategory('Прочее').length,
+                    itemBuilder: (context, index) {
+                      final product = getProductsByCategory('Прочее')[index];
+                      return Product(
+                        id: product['id']!,
+                        image: product['image']!,
+                        name: product['name']!,
+                        category: product['category']!,
+                        price: product['price']!,
                       );
                     },
                   ),

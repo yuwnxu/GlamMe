@@ -85,9 +85,9 @@ class _CartState extends State<Cart> {
                       });
                     },
                     child: Padding(
-                      padding: const EdgeInsets.all(15),
+                      padding: const EdgeInsets.all(10),
                       child: Container(
-                        height: 130,
+                        height: 150,
                         padding: const EdgeInsets.all(15),
                         decoration: BoxDecoration(
                           color: white,

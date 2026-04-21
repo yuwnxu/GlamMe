@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:glamme/data/data.dart';
 import 'package:glamme/domain/globals.dart';
 import 'package:glamme/presentation/uikit/colors.dart';
 import 'package:glamme/presentation/uikit/product.dart';
@@ -17,6 +16,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   final nameUser = prefs.getString('name') ?? 'Пользователь';
 
+  // Список категорий для отображения
   List<Map<String, dynamic>> categories = [
     {'name': 'Акции'},
     {'name': 'Макияж'},
@@ -24,15 +24,26 @@ class _HomeState extends State<Home> {
     {'name': 'Прочее'},
   ];
 
-  bool isLoading = false;
+  // Кэшируем популярные товары (чтобы не менялись при переключении категорий)
+  late List<Map<String, String>> popularProducts;
 
   @override
   void initState() {
     super.initState();
+    // Загружаем популярные товары один раз при запуске
+    popularProducts = getPopularProducts();
   }
 
   @override
   Widget build(BuildContext context) {
+    List<Map<String, String>> productsToShow = [];
+
+    if (categories[selectedCategories]['name'] == 'Акции') {
+      productsToShow = getSaleProducts();
+    } else {
+      productsToShow = getProductsByCategory(categories[selectedCategories]['name']);
+    }
+
     return Scaffold(
       backgroundColor: background,
       body: SafeArea(
@@ -90,7 +101,6 @@ class _HomeState extends State<Home> {
                         GestureDetector(
                           onTap: () {
                             navToCategories(context);
-                            selectedCategories = 0;
                           },
                           child: Icon(Icons.arrow_forward_ios, size: 18),
                         ),
@@ -100,8 +110,6 @@ class _HomeState extends State<Home> {
                 ),
               ),
               SizedBox(height: 25),
-
-              // список категорий
               SizedBox(
                 height: 40,
                 child: ListView.builder(
@@ -142,7 +150,6 @@ class _HomeState extends State<Home> {
               ),
 
               SizedBox(height: 10),
-
               SizedBox(
                 height: 300,
                 child: PageView(
@@ -155,15 +162,18 @@ class _HomeState extends State<Home> {
                   children: List.generate(categories.length, (index) {
                     return ListView.builder(
                       itemBuilder: (context, productIndex) {
+                        final product = productsToShow[productIndex];
+                        if (product == null) return SizedBox.shrink();
                         return Product(
-                          id: '1',
-                          image: 'assets/images/cream.png',
-                          name: 'Крем для лица',
-                          category: categories[index]['name'],
-                          price: '1000',
+                          id: product['id']!,
+                          image: product['image']!,
+                          name: product['name']!,
+                          category: product['category']!,
+                          price: product['price']!,
+                          oldPrice: product['oldPrice'] ?? '',
                         );
                       },
-                      itemCount: 5,
+                      itemCount: productsToShow.length,
                       scrollDirection: Axis.horizontal,
                       shrinkWrap: true,
                     );
@@ -172,7 +182,6 @@ class _HomeState extends State<Home> {
               ),
 
               SizedBox(height: 20),
-
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
@@ -189,19 +198,22 @@ class _HomeState extends State<Home> {
                 ),
               ),
 
+              SizedBox(height: 10),
+
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: ListView.builder(
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
-                  itemCount: 3,
+                  itemCount: popularProducts.length,
                   itemBuilder: (context, index) {
+                    final product = popularProducts[index];
                     return ProductCard(
-                      id: '1',
-                      image: 'assets/images/cream.png',
-                      name: 'Крем для лица',
-                      category: 'Уход',
-                      price: '10.000р',
+                      id: product['id']!,
+                      image: product['image']!,
+                      name: product['name']!,
+                      category: product['category']!,
+                      price: '${product['price']}р',
                     );
                   },
                 ),

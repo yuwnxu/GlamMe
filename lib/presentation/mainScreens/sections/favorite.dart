@@ -79,7 +79,7 @@ class _FavoriteState extends State<Favorite> {
                       });
                     },
                     child: Padding(
-                      padding: EdgeInsets.all(15),
+                      padding: EdgeInsets.all(10),
                       child: Container(
                         height: 130,
                         padding: const EdgeInsets.all(15),

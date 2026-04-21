@@ -11,6 +11,7 @@ class Product extends StatefulWidget {
   final String name;
   final String category;
   final String price;
+  final String oldPrice; //
 
   const Product({
     super.key,
@@ -18,7 +19,8 @@ class Product extends StatefulWidget {
     required this.image,
     required this.name,
     required this.category,
-    required this.price
+    required this.price,
+    this.oldPrice = '',
   });
 
   @override
@@ -96,9 +98,26 @@ class _ProductState extends State<Product> {
                   widget.category,
                   style: GoogleFonts.sulphurPoint(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xffAA9E9E)),
                 ),
-                Text(
-                  widget.price + 'р',
-                  style: GoogleFonts.sulphurPoint(fontSize: 18, fontWeight: FontWeight.w600, color: title),
+                Row(
+                  children: [
+                    Text(
+                      '${widget.price}р',
+                      style: GoogleFonts.sulphurPoint(fontSize: 18, fontWeight: FontWeight.w600, color: title),
+                    ),
+                    if (widget.oldPrice.isNotEmpty)
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8),
+                        child: Text(
+                          '${widget.oldPrice}р',
+                          style: GoogleFonts.sulphurPoint(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.grey,
+                            decoration: TextDecoration.lineThrough,
+                          ),
+                        ),
+                      ),
+                  ],
                 ),
               ],
             ),
